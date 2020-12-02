@@ -1,0 +1,171 @@
+- Game:
+    - Creating a game
+    - Deleting a game
+    - Editing a game:
+        - Display name of the game
+        - Set the lobby location
+        - Set the spawn location
+        - Set the emergency meeting location
+        - Set the block to click in-game in order to call an emergency meeting
+        - Adding task to game signs
+    - Listing of all games
+    - Get information about a game
+    - Set a global location to paste all the tasks
+    - Add task to game
+    - Add sabotage to game
+    - Remove task/sabotage of the game by breaking the sign associated to it
+    - Multiple times the same task can be added to the game
+- Task:
+    - Create a task
+    - List of all tasks
+    - Delete a task
+    - edit a task:
+        - Display name of the task
+        - Description of the task (what to do to complete it)
+        - Type of the task (if it is short, long or common)
+        - The sign to click to leave the task
+        - The zone of the task (the zone pasted in the global location of pastes)
+        - The location of the description (a hologram that shows the user what he have to do to complete the task)
+        - The location where the player will spawn when starting this task
+        - The redstone that has to be powered in order to finish the task
+        - The inventory that player will have inside of the task
+    - Test a task
+- Game management:
+    - Host a game
+    - Join a game
+    - Leave a game
+    - List all games with their status and amount of player in the game
+    - Edit options of the game:
+        - Amount of impostors
+        - The voting time
+        - The kill cooldown
+        - The max players that are allowed to join
+        - The amount of emergency meetings per players
+        - The crewmate vision
+        - The cooldown between each sabotage
+        - Impostor vision
+        - The amount of common tasks
+        - The amount of long tasks
+        - The amount of short tasks
+    - Start a game
+- When player is inside of the lobby:
+    - Prevent breaking blocks and using of commands except to leave and manage option of the game
+    - Teleported to the lobby location of the game with inventory cleared, and fully healed
+    - Save of the player before joining the game (that will be restored at the end of the game or when he leaves the game):
+        - Player inventory
+        - Player location
+        - Player gamemode
+        - Player health
+        - Player hunger
+        - Player Potions
+        - If the player is flying or not
+        - If the player can fly or not
+    - Ability to modify the option when player is the host
+    - scoreboard (displayed for all players who join the lobby) here is what it display:
+        - Title of the scoreboard is the game display name
+        - The amount of players that has currently joined with color changing depending on amount:
+            - Red: There is not enought players to start the game
+            - Yellow: There is enought players to start the game, but not that much for a good game
+            - Green: There is enought players inside of the game to start a good game :)
+        - The host of the game
+        - The max players that are allowed to join
+        - The amount of impostors displayed
+        - The voting time
+        - The kill cooldown
+        - The amount of emergency meetings per players
+        - The impostor vision
+        - The crewmate vision
+        - The common tasks amount
+        - The long tasks amount
+        - The short tasks amount
+- Inside of the game:
+    - Pre-check that the game can be started (enought players and impostors)
+    - Teleport all players to game spawn
+    - Roles are randomly given to players (impostors or crewmate, and the amount of impostors specified in the game configuration)
+    - Role displayed to the player as a title
+    - Able to start a task for crewmate
+    - A fake body is left behind the player which real body is inside of the task "zone"
+    - Ability to kill real and "fake" players for impostors
+    - Dead body left behind a dead player
+    - Dead body can be reported
+    - Dead players can see the others but others can't see them
+    - Emergency meetings can be called when clicking on the buzzer block of the game or by right clicking on a dead body
+    - Drop of items is prevented during game
+    - A compass is given to players pointing to the task/sabotage that they have to do/solve
+    - Crewmates can right/left click with compass to change the pointing of the compass to next/previous task.
+    - Impostors can right click with the compass to open the sabotage menu
+    - For crewmates and impostor: when a sabotage occur, their compass points instantly to the sabotage that they have to fix
+    - Dead body report stops sabotage and calls emergency meeting
+    - Impostors can only have one sabotage at a time active.
+    - When sabotage is finished, crewmates and impostors compass is restored to default
+    - During an emergency meeting:
+        - Dead bodies and fake bodies are removed and players are ejected from their task without completion of them
+        - Players can vote by clicking on the buzzer, then a gui showing all heads of players to vote is displayed
+        - At the end of the emergency meeting, the player who has the most vote is ejected
+    - Boss bar displayed showing progress of tasks and as title the percentage progress
+    - Compass given to the player pointing to the selected task:
+        - Left click with the compass: select next task
+        - Right click with the compass: select previous task
+    - Display of a hologram above the buzzer block (emergency meeting block) in order to make the player be able to know where is the location of this buzzer
+    - Display hologram above all tasks for the user, and a text is written telling the user if he need to do (or not to do) the task.
+    - Scoreboard in game:
+        - Title: Game display name
+        - Role of the player (&cImpostor or &aCrewmate)
+        - Kill cooldown (only for impostors)
+        - Status (dead or alive)
+        - Tasks (only for Crewmates):
+            - Display a list of all tasks display name that the user has to do with red icon: ✘ and green :heavy_check_mark: (this icon look better in game) if finished
+            - Show the current selected task by the compass to the user
+        - Active sabotage list (if any are present)
+        - Sabotage list (only for Impostors):
+            - The sabotage display name with the cooldown of it
+    - When a sabotage occur, a title with the display name of the sabotage is displayed
+- Inside of taks:
+    - Joined by right clicking on a sign in game or using the test command
+    - A new "zone" is pasted for the player
+    - Player is teleported to the spawn of the task
+    - Inventory of player is replaced by the inventory of the task (or cleared if there is not inventory)
+    - Players can place any block that is in his inventory and break only the blocks that he has placed
+    - If the player join a task during a game (and not during the test command):
+        - A fake body is left behind him
+        - The leave sign is working to leave the task before finishing it. It teleport the player back removing the fake body.
+        - When the task is finished (when the redstone that has to be alimented is alimented):
+            - Player is teleported back
+            - Fake body is removed
+            - Advancement for the game progress bar are made
+- End of the game:
+    - After a kill of impostor check if there is enought players to continue otherwise the impostors wins
+    - After ejecting a player with vote, if there is not enought impostors, crewmates win, if there is not enought crewmate, impostors win
+    - After crewmate has finished all their tasks
+    - If the game end:
+        - Victory or Loose is displayed as a title, and impostors are revealed
+        - Players are restored to their previous location like if they never joined the game
+- Security:
+    - Tasks and Game ids can only contain lowercase letters and numbers
+    - If the server stop during a game or there is a server crash, then the players that are in-game are still restored like if they did never joined the game (their stuff is not lost nor their location)
+    - Players cannot join a game just to restore their health or hunger since the restoration also restore their health and hunger to what it was before they join the game
+    - The default gamemode of players in-game is survival, when they leave the game their gamemode is restored to what it was before they join  (so op players that are in creative don't need to go back in survival, and if the default gamemode of your server is creative/advanture, then the players are back to their default gamemode)
+- Sabotage:
+    - Sabotage gui:
+        - Light: A list of randomly placed red and green wools. When the user click on the wool, it change his color (from red to green and from green to red), once the user has a full line of green wools, then the sabotage is completed
+    - Possibility to list all sabotages available
+    - Possibility to list all Gui sabotages
+    - Get infos about a sabotage
+    - delete a sabotage
+    - Edit a sabotage:
+        - Display name of the sabotage (the display name of the sabotage that will be seen inside of the game)
+        - Type of the sabotage:
+            - End: If the sabotage occur, then players have only 40 seconds to fix the sabotage before the game ends.
+            - Potion: You can setup any potion effect that you want, when you select this type, a GUI is openned allowing you to customise your sabotage:
+                - Type of the potion (blindness, slowness, invisibility...)
+                - Power of the potion (for example Slowness II if 2 is selected)
+                - Target of the potion:
+                    - Crewmates: The potion will be applied only to crewmates
+                    - Impostors: The potion will be applied only to impostors
+                    - Everyone: The potion will be applied to every player of the game
+                - Please not that potions given by sabotage does not leave any particles, so no one can know who was affected or not
+        - Solving of the sabotage:
+            - Task: You can select a task that you created that players has to solve in order to repair the sabotage.
+            - Gui: You can select any gui that is coded by ourself:
+                - lights: A gui with red and green wool when player click on a wool, the wool change to the other color (green to red and red to green), the sabotage is fixed when the lign only contain green wools
+        - Set icon for a sabotage to any item that you want
